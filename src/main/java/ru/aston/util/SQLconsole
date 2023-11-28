@@ -1,0 +1,92 @@
+DROP DATABASE company_database;
+
+CREATE DATABASE company_database;
+
+USE company_database;
+
+CREATE TABLE company (
+     id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50)
+);
+
+CREATE TABLE employee (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) ,
+    company_id INT
+);
+
+CREATE TABLE department (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) ,
+    company_id INT
+);
+
+CREATE TABLE employee_department (
+     employee_id INT ,
+     department_id INT ,
+     PRIMARY KEY (employee_id, department_id)
+);
+
+ALTER TABLE employee
+ADD CONSTRAINT fk_employee_company
+    FOREIGN KEY (company_id) REFERENCES company(id);
+
+ALTER TABLE department
+    ADD CONSTRAINT fk_department_company
+        FOREIGN KEY (company_id) REFERENCES company(id);
+
+ALTER TABLE employee_department
+    ADD CONSTRAINT fk_employee_department_employee
+        FOREIGN KEY (employee_id) REFERENCES employee(id),
+    ADD CONSTRAINT fk_employee_department_department
+        FOREIGN KEY (department_id) REFERENCES department(id);
+
+INSERT INTO company (name) VALUES
+   ('Apple'),
+   ('Google'),
+   ('Microsoft');
+
+INSERT INTO employee (name, company_id) VALUES
+    ('John Doe', 3),
+    ('Jane Smith', 1),
+    ('Mike Johnson', 2),
+    ('Emily Davis', 1),
+    ('David Brown', 3),
+    ('Sarah Johnson', 2),
+    ('Michael Smith', 3),
+    ('Jessica Davis', 1),
+    ('Christopher Brown', 2),
+    ('Olivia Wilson', 3),
+    ('Alex Johnson', 1),
+    ('Sophia Davis', 2),
+    ('William Thompson', 2),
+    ('Ava Martinez', 3),
+    ('Benjamin Taylor', 1);
+
+INSERT INTO department (name, company_id) VALUES
+  ('Marketing', 1),
+  ('Marketing', 2),
+  ('Marketing', 3),
+  ('HR', 1),
+  ('HR', 2),
+  ('HR', 3),
+  ('IT', 1),
+  ('IT', 2),
+  ('IT', 3);
+
+INSERT INTO employee_department (employee_id, department_id) VALUES
+     (1, 1),
+     (2, 2),
+     (3, 3),
+     (4, 4),
+     (5, 4),
+     (6, 5),
+     (7, 5),
+     (8, 6),
+     (9, 6),
+     (10, 7),
+     (11, 7),
+     (12, 8),
+     (13, 8),
+     (14, 9),
+     (15, 9))
