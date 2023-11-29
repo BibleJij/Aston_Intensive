@@ -19,7 +19,7 @@ public class CompanyDAO implements EntityDAO<Company> {
     @Override
     public List<Company> showAll() {
         try (Session currentSession = HibernateUtil.getSessionFactory().openSession()){
-            return currentSession.createQuery("SELECT * FROM Company", Company.class).getResultList();
+            return currentSession.createQuery("FROM Company", Company.class).getResultList();
         }
     }
 
